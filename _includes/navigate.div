@@ -1,0 +1,13 @@
+<div id="navigate">
+  <ul>
+    <li>
+      <a href="/">文章列表</a>
+      <ul id="category">
+        {% for category in site.categories %}
+        <li><a href="/{{ category[0] }}.html">{{ category[0] }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    <li><a href="/about.html">关于我</a></li>
+  </ul>
+</div>

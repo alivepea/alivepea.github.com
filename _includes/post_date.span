@@ -1,0 +1,1 @@
+<span id="post_date"> {{ page.date | date: "%Y.%m.%d" }} </span>
