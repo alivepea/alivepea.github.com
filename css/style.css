@@ -23,7 +23,9 @@ div#wrapper {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background-color: WhiteSmoke;
-    -moz-box-shadow: 0 1px 0 White;
+    box-shadow: 2px 2px 5px white;
+    -moz-box-shadow: 1px 1px 1px white;
+    -webkit-box-shadow: 1px 1px 6px white;
     padding: 10px;
     /* padding-right: 20px; */
     line-height: 190%;
@@ -103,9 +105,12 @@ pre code {
     margin: 0;
     padding: 16px;
     display: block;
-    background-color: #eee;
-    border: 1px dotted #785;
+    background-color: ivory;
+    border: 1px dotted DarkGreen;
     border-radius: 3px;
+    box-shadow: 2px 2px 5px white;
+    -moz-box-shadow: 1px 1px 1px white;
+    -webkit-box-shadow: 1px 1px 6px white;
     font-family: monospace;
 }
 
@@ -118,11 +123,11 @@ blockquote {
 }
 
 code, em, strong {
-    padding: 0.2em;
+    margin: 0.2em;
 }
 
 code {
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
 }
 kbd {
     padding-left: .25em;
@@ -150,7 +155,7 @@ kbd {
     font-weight: bold;
     font-size: xx-large;
     color: WhiteSmoke;
-    letter-spacing: 3px;
+    letter-spacing: 0.2em;
 }
 
 /* navigate */
@@ -199,10 +204,11 @@ ul.post {
 }
 
 #article a {
-    text-decoration: underline;
-    target: blank;
+    color: Green;
+    padding: 0.2em;
 }
 #article a:hover {
+    background: LightGray;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px 3px 3px 3px;
     border-radius: 3px;
