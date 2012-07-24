@@ -7,7 +7,7 @@ body {
     background: DimGray url(/images/bg.png);
     background-attachment: fixed;
     background-position:center center;
-    font: 12px Verdana, Arial, Helvetica, sans-serif;
+    font: 12px Tahoma, Arial, Helvetica, sans-serif;
 }
 
 div {
@@ -18,7 +18,7 @@ div#header {
     margin: auto;
 }
 div#wrapper {
-    font-size:15px;
+    font-size: 16px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -27,9 +27,8 @@ div#wrapper {
     -moz-box-shadow: 1px 1px 1px white;
     -webkit-box-shadow: 1px 1px 6px white;
     padding: 10px;
-    /* padding-right: 20px; */
     line-height: 190%;
-    margin: 0 auto 50px;
+    margin: 0 auto;
     width: 700px;
     color: #111;
 }
@@ -45,8 +44,6 @@ div#navigate {
 div#content {
     float: left;
     width: 85%;
-
-
 }
 div#article {
     width: 85%;
@@ -59,7 +56,7 @@ div#footer {
 
 
 /* typography */
-h2, h3, h4, h5, h6 {
+h3, h4, h5, h6 {
     padding: 0;
     margin: 0;
 }
@@ -80,6 +77,10 @@ h4, h5, h6 {
 /* font-size: medium; */
 }
 
+p {
+    text-indent: 2em;
+}
+
 ul {
     list-style: none;
 }
@@ -90,15 +91,14 @@ a {
 }
 a:hover, a:hover span#eighty, a:hover span#beans {
     color: black;
+    background: lightgrey;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px;
+
 }
 li a {
-    padding: 2px;
-}
-li a:hover {
-    background: lightgrey;
-    -moz-border-radius: 5px 5px 5px 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    padding: 0.2em;
 }
 
 pre code {
@@ -111,24 +111,27 @@ pre code {
     box-shadow: 2px 2px 5px white;
     -moz-box-shadow: 1px 1px 1px white;
     -webkit-box-shadow: 1px 1px 6px white;
-    font-family: monospace;
 }
 
 blockquote {
     width: 50%;
     margin: auto;
     margin-bottom: 1em;
-    text-align: center;
+    text-align: left;
     font-style: italic;
+    }
+blockquote p {
+    text-indent: 0em;
 }
-
 code, em, strong {
     margin: 0.2em;
+    font-family: Arial;
 }
 
 code {
-    letter-spacing: 0.05em;
+    font-family: Arial Black;
 }
+
 kbd {
     padding-left: .25em;
     padding-right: .25em;
@@ -139,6 +142,9 @@ kbd {
     box-shadow: 1px 1px silver;
 }
 
+.path {
+    text-decoration: underline;
+}
 /* header */
 #header {
     width: 740px;
@@ -146,16 +152,19 @@ kbd {
 
 #tags {
     float: right;
-    margin: 25px 0;
+    margin: 20px 0;
     color: Gray;
     font-weight: bold;
     font-size: 14px;
 }
-#header h1 a{
+#header a {
     font-weight: bold;
     font-size: xx-large;
     color: WhiteSmoke;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
+}
+#header a:hover {
+    background: none;
 }
 
 /* navigate */
@@ -165,24 +174,26 @@ kbd {
     margin: 2px 2px;
 }
 
+#navigate a:hover {
+    background: lightgrey;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
 #category li a {
     color: #222;
     font-weight: normal;
-    font-family: monospace;
-    text-decoration: underline;
+
 }
 
 /* content */
-ul.post {
+.post {
     padding: 0 1em;
     padding-left: 2em;
 }
-.post a:hover{
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px;
-}
-.post li .date {
+
+.post .date {
     float: right;
     color: Gray;
     font-size: 12px;
@@ -197,6 +208,7 @@ ul.post {
     font-weight: normal;
     line-height: 50%;
     letter-spacing: 0.1em;
+    margin-top: -20px;
 }
 
 #article ul {
@@ -207,13 +219,6 @@ ul.post {
     color: Green;
     padding: 0.2em;
 }
-#article a:hover {
-    background: LightGray;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px;
-}
-
 
 /* footer */
 #footer h6 {
