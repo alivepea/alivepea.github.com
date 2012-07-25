@@ -24,9 +24,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     
     <div id="wrapper">
       <div id="article">
+      {% include pagination.span %}
         {{ content }}
       </div>
 
+      {% include disqus_thread.div %}
      {% include footer.div %}
 
     </div>

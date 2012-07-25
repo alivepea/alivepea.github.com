@@ -1,0 +1,10 @@
+<span id="pagination">
+    {% if page.previous.url %}
+    <a href="{{page.previous.url}}" title="{{page.previous.title}}">«上一篇</a>
+    {% endif %}
+    |
+    {% if page.next.url %}
+    <a href="{{page.next.url}}" title="{{page.next.title}}">下一篇»</a>
+  {% endif %}
+</span>
+
