@@ -50,8 +50,8 @@ div#article {
 }
 div#footer {
     margin: 0;
-    margin-top: 30px;
-    clear: left;
+    margin-top: 2em;
+    clear: both;
 }
 
 
@@ -60,19 +60,7 @@ h3, h4, h5, h6 {
     padding: 0;
     margin: 0;
 }
-h2 {
-    font-size: x-large;
-    text-align: center;
-}
-h3, h4 {
-    background-color: lightgrey;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0.2em;
-}
-h3::before {                    /* IE do NOT support it */
-    content: "ℚ ";
-}
+
 h4, h5, h6 {
 /* font-size: medium; */
 }
@@ -144,6 +132,7 @@ kbd {
 
 .path {
     text-decoration: underline;
+    margin: 0.2em;
 }
 /* header */
 #header {
@@ -206,11 +195,21 @@ kbd {
     float: right;
     font-size: 12px;
     font-weight: normal;
-    line-height: 50%;
     letter-spacing: 0.1em;
-    margin-top: -20px;
 }
-
+#article h2 {
+    font-size: x-large;
+    text-align: center;
+}
+#article h3, h4 {
+    background-color: lightgrey;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0.2em;
+}
+#article h3::before {                    /* IE do NOT support it */
+    content: "ℚ ";
+}
 #article ul {
     list-style: circle;
 }
@@ -218,6 +217,14 @@ kbd {
 #article a {
     color: Green;
     padding: 0.2em;
+}
+
+#article #pagination {
+    float: right;
+    font-size: 12px;
+}
+#article #pagination a {
+    color: #111;
 }
 
 /* footer */
