@@ -232,3 +232,17 @@ kbd {
     text-align: center;
     background: lightgray;
 }
+
+#footer .widget {
+    float: right;
+    margin: 0.2em;
+}
+
+#footer .widget img {
+    width: 25px;
+    height: 25px;
+}
+
+#footer a {
+    background: none;
+}
