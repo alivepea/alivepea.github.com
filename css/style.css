@@ -54,7 +54,6 @@ div#footer {
     clear: both;
 }
 
-
 /* typography */
 h3, h4, h5, h6 {
     padding: 0;
@@ -96,9 +95,11 @@ pre code {
     background-color: ivory;
     border: 1px dotted DarkGreen;
     border-radius: 3px;
-    box-shadow: 2px 2px 5px white;
-    -moz-box-shadow: 1px 1px 1px white;
-    -webkit-box-shadow: 1px 1px 6px white;
+    box-shadow: 2px 2px 5px DarkKhaki;
+    -moz-box-shadow: 1px 1px 1px DarkKhaki;
+    -webkit-box-shadow: 1px 1px 6px DarkKhaki;
+    font-family: Arial;
+    line-height: 150%;
 }
 
 blockquote {
@@ -107,11 +108,11 @@ blockquote {
     margin-bottom: 1em;
     text-align: left;
     font-style: italic;
-    }
+}
 blockquote p {
     text-indent: 0em;
 }
-code, em, strong {
+q, var, code, em, strong {
     margin: 0.2em;
     font-family: Arial;
 }
@@ -130,10 +131,11 @@ kbd {
     box-shadow: 1px 1px silver;
 }
 
-.path {
-    text-decoration: underline;
-    margin: 0.2em;
+var {
+    font-family: Arial Black;
 }
+
+
 /* header */
 #header {
     width: 740px;
@@ -207,7 +209,7 @@ kbd {
     font-weight: bold;
     padding: 0.2em;
 }
-#article h3::before {                    /* IE do NOT support it */
+#article h3:before {                    /* IE do NOT support it */
     content: "ℚ ";
 }
 #article ul {
@@ -225,6 +227,13 @@ kbd {
 }
 #article #pagination a {
     color: #111;
+}
+
+#article q {                    /* format path */
+    text-decoration: underline;
+}
+#article q:before, #article q:after {
+    content: none;
 }
 
 /* footer */
