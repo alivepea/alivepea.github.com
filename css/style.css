@@ -212,8 +212,13 @@ var {
 #article h3:before {                    /* IE do NOT support it */
     content: "ℚ ";
 }
+
 #article ul {
     list-style: circle;
+}
+
+#article li p {
+    text-indent: 0;
 }
 
 #article a {
@@ -244,12 +249,12 @@ var {
 
 #footer .widget {
     float: right;
-    margin: 0.2em;
+    margin: 0.2em 0.5em;
 }
 
 #footer .widget img {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 
 #footer a {
