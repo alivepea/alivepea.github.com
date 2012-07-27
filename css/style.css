@@ -158,6 +158,11 @@ var {
     background: none;
 }
 
+#pagination {
+    float: right;
+    font-size: 12px;
+}
+
 /* navigate */
 #navigate ul {
     padding: 0;
@@ -226,10 +231,24 @@ var {
     padding: 0.2em;
 }
 
-#article #pagination {
-    float: right;
-    font-size: 12px;
+.footnotes {                    /* kramdown generate it */
+    font-size: 0.8em;
+    
 }
+.footnotes p {
+    line-height: 100%;
+}
+.footnotes hr {
+    clear: both;
+}
+a[rel="reference"], a[rel="footnote"] {
+ 	text-decoration: none;
+        background: none;
+}
+a[rel="footnote"] {
+        vertical-align: super;
+}
+
 #article #pagination a {
     color: #111;
 }
