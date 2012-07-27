@@ -39,7 +39,6 @@ div#navigate {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 0.1em;
-    line-height: 22px;
 }
 div#content {
     float: left;
@@ -161,6 +160,7 @@ var {
 #pagination {
     float: right;
     font-size: 12px;
+    line-height: 1em;
 }
 
 /* navigate */
@@ -191,10 +191,10 @@ var {
 
 .post .date {
     float: right;
-    color: Gray;
-    font-size: 12px;
-    margin: 0;
-    letter-spacing: 0.1em;
+}
+#content li {
+    border-bottom: 2px solid lightgray;
+    padding-top: 0.5em;
 }
 
 /* article */
@@ -202,7 +202,6 @@ var {
     float: right;
     font-size: 12px;
     font-weight: normal;
-    letter-spacing: 0.1em;
 }
 #article h2 {
     font-size: x-large;
@@ -231,22 +230,23 @@ var {
     padding: 0.2em;
 }
 
+#article sup a {
+    padding: 0;
+}
 .footnotes {                    /* kramdown generate it */
     font-size: 0.8em;
-    
 }
 .footnotes p {
     line-height: 100%;
 }
-.footnotes hr {
-    clear: both;
-}
+
 a[rel="reference"], a[rel="footnote"] {
- 	text-decoration: none;
-        background: none;
+    text-decoration: none;
+    background: none;
 }
 a[rel="footnote"] {
-        vertical-align: super;
+    vertical-align: super;
+    font-size: 12px;
 }
 
 #article #pagination a {
@@ -260,6 +260,9 @@ a[rel="footnote"] {
     content: none;
 }
 
+#article hr {
+    clear: both;
+}
 /* footer */
 #footer h6 {
     text-align: center;

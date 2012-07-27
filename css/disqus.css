@@ -10,7 +10,12 @@
 }
 #dsq-content .dsq-textarea-wrapper {
     min-height: 40px;
+    padding: 0px 10px;
 }
+#dsq-content .dsq-comment-text p {
+    text-indent: 0;
+}
+
 #dsq-content .dsq-comment-footer {
     margin: 0;
 }
@@ -43,10 +48,6 @@
 }
 
 #dsq-comments li.dsq-comment {
-    margin-top:8px;
-    margin-bottom:6px;
-    margin-bottom:8px;;
-    padding:8px;
     -moz-box-shadow:0 0 8px #DDDDDD;
     -webkit-box-shadow:0 0 8px #DDDDDD;
     box-shadow:0 0 8px #DDDDDD;
