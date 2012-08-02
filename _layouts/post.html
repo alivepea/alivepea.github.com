@@ -16,12 +16,23 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <meta name="description" content="{{ page.description }}" />
     <meta name="keywords" content="{{ page.keywords | join: ',' }}" />
     <link rel="stylesheet" href="/css/style.css" type="text/css" />
+    <!-- lightview -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="../js/excanvas/excanvas.js"></script>
+        <![endif]-->
+    <script type="text/javascript" src="/js/spinners/spinners.min.js"></script>
+    <script type="text/javascript" src="/js/lightview/lightview.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/lightview/lightview.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
     <link rel="stylesheet" href="/css/highlight.css" type="text/css" />
   </head>
   <body>
 
     {% include header.div %}
-    
+
     <div id="wrapper">
       {% include pagination.div %}
       <div id="article">
@@ -32,5 +43,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
       {% include footer.div %}
 
     </div>
+    {% include lightview.script %}
   </body>
 </html>

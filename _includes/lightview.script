@@ -1,0 +1,5 @@
+<script>
+  (function ($) {
+  $("#article a").has("img").addClass("lightview");
+  })(jQuery);
+</script>
