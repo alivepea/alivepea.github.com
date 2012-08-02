@@ -6,6 +6,7 @@ layout: default
 * 于2008年自动化专业毕业，一直在深圳从事`linux`驱动开发。
 
 * 热爱`linux`，生活在[gentoo][]的世界里。
+
 [gentoo]: http://www.gentoo.org "gentoo"
 
 * 享受编程带来的快乐，并且相信世界正由一群程序员改变着。
