@@ -1,0 +1,51 @@
+digraph i2c_subsystem {
+        rankdir=LR;
+        edge[color="#2e3436"];
+        node [shape=record fontname=Courier fontsize=12];
+        bgcolor=gray;
+        
+        struct_i2c_client[label=" \
+                          unsigned short	flags \l|\
+                          unsigned short	addr \l|\
+                          char	name[I2C_NAME_SIZE] \l|\
+                          <adapter> struct i2c_adapter	*adapter \l|\
+                          <driver> struct i2c_driver	*driver \l|\
+                          struct device	dev \l|\
+                          int	irq \l|\
+                          struct list_head	detected \l"
+                          ];
+        struct_i2c_adapter[label=" \
+                           struct module	*owner \l|\
+                           unsigned int	class \l|\
+                           const struct i2c_algorithm	*algo \l|\
+                           void	*algo_data \l|\
+                           struct rt_mutex	bus_lock \l|\
+                           int	timeout \l|\
+                           int	retries \l|\
+                           struct device	dev \l|\
+                           int	nr \l|\
+                           char	name[48] \l|\
+                           struct completion	dev_released \l|\
+                           struct mutex	userspace_clients_lock \l|\
+                           struct list_head	userspace_clients \l"
+                           ];
+        struct_i2c_driver [label=" \
+                           unsigned int	class \l| \
+                           int	(*attach_adapter)(struct i2c_adapter *) \l|\
+                           int	(*detach_adapter)(struct i2c_adapter *) \l|\
+                           int	(*probe)(struct i2c_client *, const struct i2c_device_id *) \l|\
+                           int 	(*remove)(struct i2c_client *) \l|\
+                           void	(*shutdown)(struct i2c_client *) \l|\
+                           int	(*suspend)(struct i2c_client *, pm_message_t mesg) \l|\
+                           int	(*resume)(struct i2c_client *) \l|\
+                           void	(*alert)(struct i2c_client *, unsigned int data) \l|\
+                           int	(*command)(struct i2c_client *, unsigned int cmd, void *) \l|\
+                           struct device_driver	driver \l|\
+                           const struct i2c_device_id	*id_table \l|\
+                           int	(*detect)(struct i2c_client *, struct i2c_board_inf *) \l|\
+                           const unsigned short	*address_list \l|\
+                           struct list_head	clients \l"
+                           ];
+        struct_i2c_client:driver -> struct_i2c_driver;
+        struct_i2c_client:adapter -> struct_i2c_adapter;
+}
