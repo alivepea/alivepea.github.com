@@ -263,6 +263,14 @@ a[rel="footnote"] {
 #article hr {
     clear: both;
 }
+.a_img:hover {
+    background: none;
+}
+
+#article img:hover {
+    box-shadow: 2px 2px 5px LightGray;
+}
+
 /* footer */
 #footer h6 {
     text-align: center;
