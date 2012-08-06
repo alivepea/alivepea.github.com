@@ -30,7 +30,7 @@ div#wrapper {
     line-height: 190%;
     margin: 0 auto;
     width: 700px;
-    color: #111;
+    colopr: #111;
 }
 div#navigate {
     float:left;
@@ -89,16 +89,17 @@ li a {
 
 pre code {
     margin: 0;
-    padding: 16px;
+    padding: 0.2em;
     display: block;
-    background-color: ivory;
+    background-color: Lavender;
     border: 1px dotted DarkGreen;
     border-radius: 3px;
-    box-shadow: 2px 2px 5px DarkKhaki;
-    -moz-box-shadow: 1px 1px 1px DarkKhaki;
-    -webkit-box-shadow: 1px 1px 6px DarkKhaki;
+    box-shadow: 2px 2px 5px Gray;
+    -moz-box-shadow: 1px 1px 1px Gray;
+    -webkit-box-shadow: 1px 1px 6px Gray;
     font-family: Arial;
     line-height: 150%;
+    overflow: auto;
 }
 
 blockquote {
@@ -268,7 +269,7 @@ a[rel="footnote"] {
 }
 
 #article img:hover {
-    box-shadow: 2px 2px 5px LightGray;
+    box-shadow: 2px 2px 5px Gray;
 }
 
 /* footer */

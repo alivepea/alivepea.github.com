@@ -22,7 +22,7 @@
 };
 
 Lightview.Skins = {
-  // every possible property is defined on the base skin 
+  // every possible property is defined on the base skin
   // all other skins inherit from this skin
   'base': {
     ajax: {
@@ -39,7 +39,7 @@ Lightview.Skins = {
     },
     continuous: false,
     controls: {
-      close: 'relative',
+      close: 'top',
       slider: {
         items: 5
       },
@@ -82,7 +82,7 @@ Lightview.Skins = {
       background: '#202020',
       opacity: .85
     },
-    padding: 10,
+    padding: 5,
     position: {
       at: 'center',
       offset: { x: 0, y: 0 }
@@ -109,7 +109,7 @@ Lightview.Skins = {
     thumbnail: { icon: false },
     viewport: 'scale',
     wrapperClass: false,
-    
+
     initialTypeOptions: {
       ajax: {
         keyboard: false,
@@ -141,7 +141,12 @@ Lightview.Skins = {
         viewport: 'crop'
       },
       image: {
-        viewport: 'scale'
+        viewport: 'scale',
+        spacing: {
+          relative: { horizontal: 0, vertical: 10 },
+          thumbnails: { horizontal: 30, vertical: 30 },
+          top: { horizontal: 0, vertical: 0 }
+        }
       },
       inline: {
         keyboard: false,
@@ -168,7 +173,7 @@ Lightview.Skins = {
 
   // reserved for resetting options on the base skin
   'reset': { },
-  
+
   // the default skin
   'dark': {
     border: {
@@ -198,7 +203,7 @@ Lightview.Skins = {
       color: '#333'
     }
   },
-  
+
   'mac': {
     background: '#fff',
     border: {

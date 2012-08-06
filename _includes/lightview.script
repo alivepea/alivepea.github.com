@@ -1,6 +1,5 @@
 <script>
   (function ($) {
-  $("#article a").has("img").addClass("lightview");
-  $("#article a").has("img").addClass("a_img");
+  $("#article a").has("img").addClass("lightview a_img");
   })(jQuery);
 </script>
