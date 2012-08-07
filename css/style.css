@@ -89,10 +89,10 @@ li a {
 
 pre code {
     margin: 0;
-    padding: 0.2em;
+    padding: 1em 0.2em;
     display: block;
     background-color: Lavender;
-    border: 1px dotted DarkGreen;
+    border: 1px dotted LightSlateGray;
     border-radius: 3px;
     box-shadow: 2px 2px 5px Gray;
     -moz-box-shadow: 1px 1px 1px Gray;
