@@ -15,7 +15,7 @@ description: emacs下实现taglist
 
 ### 安装
 
-* ** `cedet`**
+* **cedet**
 
 利用`cedet`，`speedbar`可以给我们更多有用的信息，命令行会提示该符号的参数等。
 {% highlight bash lineno %}
