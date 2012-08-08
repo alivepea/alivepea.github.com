@@ -30,3 +30,10 @@ $ emerge -avqu cedet
 {% endhighlight %}
 
 ### 效果
+
+  [ ![speedbar][speedbar_t_image] ][speedbar_image]
+
+[speedbar_t_image]: /images/thumbnails/speedbar_t.png "i2c susbsystem"
+[speedbar_image]: /images/speedbar.png "i2c subsystem"
+
+[emacswiki](http://emacswiki.org)里有关于如果将`speedbar`嵌入到`emacs`窗口的扩展，但在`awesome`窗口管理器下使用，`speedbar`在另一个窗口也挺很方便。
