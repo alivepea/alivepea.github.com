@@ -7,10 +7,10 @@ layout: default
 
 * 热爱`linux`，生活在[gentoo][]的世界里。
 
-[gentoo]: http://www.gentoo.org "gentoo"
-
 * 享受编程带来的快乐，并且相信世界正由一群程序员改变着。
 
 * 偶尔爱看点文艺类小说/电影，常谈论一些`形而上学`的东西。
 
 * 喜欢自给自足的满足感，做饭，运动，阅读...
+
+[gentoo]: http://www.gentoo.org "gentoo"
