@@ -18,22 +18,26 @@ description: emacs下实现taglist
 * **cedet**
 
 利用`cedet`，`speedbar`可以给我们更多有用的信息，命令行会提示该符号的参数等。
-{% highlight bash lineno %}
+{% highlight bash linenos %}
 $ emerge -avqu cedet
 {% endhighlight %}
 
 ### 配置
 
 `speedbar`默认的配置将符号自动分组，但对于大屏幕来说，这没有必要。
-{% highlight ec linenos %}
+{% highlight c linenos %}
 (setq speedbar-tag-hierarchy-method nil)
 {% endhighlight %}
 
 ### 效果
 
+如图：
   [ ![speedbar][speedbar_t_image] ][speedbar_image]
 
 [speedbar_t_image]: /images/thumbnails/speedbar_t.png "i2c susbsystem"
 [speedbar_image]: /images/speedbar.png "i2c subsystem"
 
 [emacswiki](http://emacswiki.org)里有关于将`speedbar`嵌入到`emacs`窗口的扩展。但在`awesome`窗口管理器下使用，`speedbar`在另一个窗口也挺很方便。
+
+~EOF~ {% include post_date.span %}
+

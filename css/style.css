@@ -27,7 +27,7 @@ div#wrapper {
     -moz-box-shadow: 1px 1px 1px white;
     -webkit-box-shadow: 1px 1px 6px white;
     padding: 10px;
-    line-height: 190%;
+    line-height: 175%;
     margin: 0 auto;
     width: 700px;
     colopr: #111;
@@ -133,6 +133,7 @@ kbd {
 
 var {
     font-family: "Arial Black";
+    font-style: normal;
 }
 
 
@@ -264,6 +265,13 @@ a[rel="footnote"] {
 #article hr {
     clear: both;
 }
+
+#article img {
+    max-width: 800px;
+    display: table-cell;
+    margin: 0 auto;
+    margin-bottom: -2em;        /* table-cell has a line-break */
+}
 .a_img:hover {
     background: none;
 }
@@ -272,6 +280,9 @@ a[rel="footnote"] {
     box-shadow: 2px 2px 5px Gray;
 }
 
+#article ul {
+    margin-left: -1em;
+}
 /* footer */
 #footer h6 {
     text-align: center;
