@@ -18,7 +18,7 @@ div#header {
     margin: auto;
 }
 div#wrapper {
-    font-size: 16px;
+    font-size: 18px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -90,6 +90,7 @@ li a {
 pre code {
     margin: 0;
     padding: 0.5em 0.2em;
+    font-size: 14px;
     display: block;
     background-color: #333;
     color: Gray;
@@ -109,6 +110,7 @@ blockquote {
     margin-bottom: 1em;
     text-align: left;
     font-style: italic;
+    font-size: 14px;
 }
 blockquote p {
     text-indent: 0em;
