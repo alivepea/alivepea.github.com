@@ -93,7 +93,7 @@ pre code {
     font-size: 14px;
     display: block;
     background-color: #333;
-    color: Gray;
+    color: LightGray;
     border: 1px dotted LightSlateGray;
     border-radius: 3px;
     box-shadow: 2px 2px 5px Gray;
@@ -111,6 +111,7 @@ blockquote {
     text-align: left;
     font-style: italic;
     font-size: 14px;
+    line-height: 150%;
 }
 blockquote p {
     text-indent: 0em;

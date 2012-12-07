@@ -6,7 +6,7 @@
 }
 
 .hll { background-color: #ffffcc }
-.c { color: #808080 } /* Comment */
+.c { color: lightgray } /* Comment */
 .err { color: #F00000; background-color: #F0A0A0 } /* Error */
 .k { color: #008000; font-weight: bold } /* Keyword */
 .o { color: #008080 } /* Operator */
