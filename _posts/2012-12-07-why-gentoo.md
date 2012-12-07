@@ -9,7 +9,7 @@ published: true
 ## {{ page.title }}
 
 > "The Linux philosophy is 'Laugh in the face of danger'. Oops.
-> Wrong One. '忆Do it yourself'. Yes, that's it."
+> Wrong One. 'Do it yourself'. Yes, that's it."
 > --- Linus Torvalds
 
 “系统启动不了，等我重装下系统再提交代码...”，关键时候，好几次听到使用`ubuntu`的同事这样的抱怨。
@@ -29,8 +29,8 @@ published: true
 它非常的简洁清晰，可高度定制，专为你的硬件配置和需求而生。
 
 + <q>/etc/portage/</q> -- `portage`的用户配置模块，控制`emerge`时生成定制化的系统。
-+ <q>/etc/{init,config}.d/</q> -- 系统服务启动脚本和配置脚本
-+ <q>/etc/runlevels/</q> -- 控制系统自启动服务的运行级别
++ <q>/etc/{init,config}.d/</q> -- 系统服务启动脚本和配置脚本。
++ <q>/etc/runlevels/</q> -- 控制系统自启动服务的运行级别。
 + <q>/usr/portage/</q> -- `portage`数据库。
 + <q>/var/lib/portage/</q> -- 用户指定的软件包。
 + <q>/var/db/pkg/</q> -- 软件包的`emerge`日志。
