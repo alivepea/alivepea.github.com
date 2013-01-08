@@ -30,3 +30,5 @@ $ wine ~/.wine/drive_c/Python27/python.exe ~/bin/pyinstaller-2.0/pyinstaller.py 
 
 得益于*python*简单易学和跨平台，也得益于了*pyinstaller+wine*的完美组合，无需让用户安装*python*运行环境，
 linux下的程序员可以真正意义上**Wrote once, run anywhere**。
+
+~EOF~ {% include post_date.span %}
