@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Gentoo ── 给力的企鹅
-category: misc
-tags: blog
-published: true
+category: linux
+keywords: [gentoo, emerge]
+description: Gentoo 是一个很值得重度linux用户使用的发行版
 ---
 
 ## {{ page.title }}

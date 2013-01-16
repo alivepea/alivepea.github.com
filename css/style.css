@@ -244,6 +244,8 @@ var {
 }
 .footnotes p {
     line-height: 100%;
+    margin-top: 0em;
+    margin-bottom: 0em;
 }
 
 a[rel="reference"], a[rel="footnote"] {
