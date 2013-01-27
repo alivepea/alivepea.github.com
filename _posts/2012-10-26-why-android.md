@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 为什么选用 Android
-category: misc
+category: linux
 tags: blog
 published: true
 ---
