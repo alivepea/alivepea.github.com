@@ -7,7 +7,7 @@ title: 那一颗花生
   {% for post in site.categories.misc %}
   <li>
     <a href="{{ post.url }}">{{ post.title}}</a>
-    <span class="date" cate="{{ post.categories }}">
+    <span class="date">
     {{ post.date | date:"%Y-%m-%d" }}</span>
   </li>
   {% endfor %}
