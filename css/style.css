@@ -71,6 +71,10 @@ ul {
     list-style: none;
 }
 
+img {
+    border: none;
+}
+
 a {
     color: black;
     text-decoration:none;
