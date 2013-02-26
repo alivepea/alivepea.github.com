@@ -8,6 +8,7 @@ body {
     background-attachment: fixed;
     background-position:center center;
     font: 12px Tahoma, Arial, Helvetica, sans-serif;
+    color: #333333;
 }
 
 div {
@@ -18,7 +19,7 @@ div#header {
     margin: auto;
 }
 div#wrapper {
-    font-size: 18px;
+    font-size: 16px;
     -moz-border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -30,7 +31,6 @@ div#wrapper {
     line-height: 175%;
     margin: 0 auto;
     width: 700px;
-    colopr: #111;
 }
 div#navigate {
     float:left;
@@ -76,7 +76,7 @@ img {
 }
 
 a {
-    color: black;
+    color: #333333;
     text-decoration:none;
 }
 a:hover, a:hover span#eighty, a:hover span#beans {
@@ -188,7 +188,7 @@ var {
 }
 
 #category li a {
-    color: #222;
+    color: #333333;
     font-weight: normal;
 
 }
@@ -262,7 +262,7 @@ a[rel="footnote"] {
 }
 
 #article #pagination a {
-    color: #111;
+    color: #333333;
 }
 
 #article q {                    /* format path */
