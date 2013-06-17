@@ -95,7 +95,6 @@ li a {
 pre code {
     margin: -0.5em 2em;
     padding: 0.5em 0.2em;
-    text-indent: 0em;
     font-size: 14px;
     display: block;
     background-color: white;
@@ -134,7 +133,7 @@ kbd {
     border: solid 1px #C2C2C2;
     border-radius: 4px;
     background-color: #F0F0F0;
-    box-shadow: 1px 1px silver;
+    box-shadow: 2px 2px silver;
 }
 
 var {
