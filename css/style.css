@@ -226,6 +226,7 @@ var {
 
 #article ul {
     list-style: circle;
+    margin-top: -1em;
 }
 
 #article li p {
