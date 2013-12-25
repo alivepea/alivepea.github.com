@@ -93,16 +93,20 @@ li a {
 }
 
 pre code {
-    margin: -0.5em 2em;
-    padding: 0.5em 0.2em;
+    margin: -0.5em 1em;
+    padding: 0.5em 0.5em;
     font-size: 12px;
     display: block;
-    background-color: white;
     color: black;
-    border: 1px solid black;
     font-family: Courier new mono;
-    line-height: 150%;
+    line-height: 120%;
     overflow: auto;
+
+    border: 0px;
+    border-radius: 0px;
+    background-color: rgba(102,128,153,0.05);
+    border-left: 5px solid rgba(102,128,153,0.175);
+    border-left-width: 5px;
 }
 
 blockquote {
