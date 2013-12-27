@@ -30,7 +30,7 @@ div#wrapper {
     padding: 10px;
     line-height: 175%;
     margin: 0 auto;
-    width: 700px;
+    width: 780px;
 }
 div#navigate {
     float:left;
@@ -99,7 +99,7 @@ pre code {
     display: block;
     color: black;
     font-family: Courier new mono;
-    line-height: 120%;
+    line-height: 130%;
     overflow: auto;
 
     border: 0px;
@@ -147,6 +147,19 @@ kbd {
 var {
     font-family: "Arial Black";
     font-style: normal;
+}
+
+table
+{
+    /* border-collapse:collapse; */
+}
+
+td
+{
+    /* border: 1px solid black; */
+    background-color: rgba(102,128,153,0.05);
+    padding: 0 1em;
+    font-family: monospace;
 }
 
 
