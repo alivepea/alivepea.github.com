@@ -139,8 +139,7 @@ genalloc分配函数实现如下：
 
 下面是实现的位图置位函数：
 
-
-    /* 置位*addr这个字的mask_to_set位置位的无锁实现 */
+    /* *addr这个字的mask_to_set位置位的无锁实现 */
     static int set_bits_ll(unsigned long *addr, unsigned long mask_to_set)
     {
     	unsigned long val, nval;
@@ -190,7 +189,7 @@ genalloc分配函数实现如下：
 
 Genalloc容易产生内存碎片，寻找空闲块的复杂度是*Ο(n)*。但它的内存占用少，算法
 简单，在分配单元不太多的情况下分配效率很高。除RCU外，对内核其它模块基本上没什
-么依赖，很容易移植到应用程序中。内核另一个分配器slab是大名鼎鼎的`伙伴系统Buddy System`,
+么依赖，很容易移植到应用程序中。内核另一个分配器是大名鼎鼎的`伙伴系统Buddy System`,
 它在较少的内存碎片的同时，又可以高效的管理大量的内存单元。要快速的了解它的原理，请看
 [这里](http://coolshell.cn/articles/10427.html).
 
