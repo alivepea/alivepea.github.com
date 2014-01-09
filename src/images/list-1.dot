@@ -1,0 +1,23 @@
+digraph list {
+        node [shape=record fontname=Courier fontsize=12];
+        edge [color="#2e3436" height=0 arrowhead=vee arrowsize=0.5];
+        pad=0.2;
+        rankdir=LR;
+        // rank=same;
+        
+        label=< <B> 链表 </B> >;
+        labelloc="t";
+        fontsize=16;
+        bgcolor=Gainsboro;
+        
+        node1[label="node1 | {<prev>prev|<next>next}"];
+        node2[label="node2 | {<prev>prev|<next>next}"];
+        node3[label="node3 | {<prev>prev|<next>next}"];
+
+        node1:next->node2;
+        node1:prev->node3;
+        node2:next->node3;
+        node2:prev->node1;
+        node3:prev->node2
+        node3:next->node1
+}
