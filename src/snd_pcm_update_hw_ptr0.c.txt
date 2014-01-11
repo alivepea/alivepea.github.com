@@ -1,0 +1,254 @@
+
+static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
+				  unsigned int in_interrupt)
+{
+	struct snd_pcm_runtime *runtime = substream->runtime;
+	snd_pcm_uframes_t pos;
+	snd_pcm_uframes_t old_hw_ptr, new_hw_ptr, hw_base;
+	snd_pcm_sframes_t hdelta, delta;
+	unsigned long jdelta;
+	unsigned long curr_jiffies;
+	struct timespec curr_tstamp;
+	struct timespec audio_tstamp;
+	int crossed_boundary = 0;
+
+	old_hw_ptr = runtime->status->hw_ptr;
+
+	/*
+	 * group pointer, time and jiffies reads to allow for more
+	 * accurate correlations/corrections.
+	 * The values are stored at the end of this routine after
+	 * corrections for hw_ptr position
+	 */
+	pos = substream->ops->pointer(substream); /* 取得缓冲区中硬件指针的偏移地址 */
+	curr_jiffies = jiffies;
+	if (runtime->tstamp_mode == SNDRV_PCM_TSTAMP_ENABLE) {
+		snd_pcm_gettime(runtime, (struct timespec *)&curr_tstamp);
+
+		if ((runtime->hw.info & SNDRV_PCM_INFO_HAS_WALL_CLOCK) &&
+			(substream->ops->wall_clock))
+			substream->ops->wall_clock(substream, &audio_tstamp);
+	}
+
+	if (pos == SNDRV_PCM_POS_XRUN) { /* 若硬件检测到XRUN，则退出 */
+		xrun(substream);
+		return -EPIPE;
+	}
+	if (pos >= runtime->buffer_size) { /* 异常发生 */
+		if (snd_printd_ratelimit()) {
+			char name[16];
+			snd_pcm_debug_name(substream, name, sizeof(name));
+			xrun_log_show(substream);
+			snd_printd(KERN_ERR  "BUG: %s, pos = %ld, "
+				   "buffer size = %ld, period size = %ld\n",
+				   name, pos, runtime->buffer_size,
+				   runtime->period_size);
+		}
+		pos = 0;
+	}
+	pos -= pos % runtime->min_align; /* 保证对齐 */
+	if (xrun_debug(substream, XRUN_DEBUG_LOG))
+		xrun_log(substream, pos, in_interrupt);
+	hw_base = runtime->hw_ptr_base;
+	new_hw_ptr = hw_base + pos;
+	if (in_interrupt) {	/* 若前一次中断没来得处理，这次中断应该校正 hw_base */
+		/* we know that one period was processed */
+		/* delta = "expected next hw_ptr" for in_interrupt != 0 */
+		delta = runtime->hw_ptr_interrupt + runtime->period_size;
+		if (delta > new_hw_ptr) {
+			/* check for double acknowledged interrupts */
+			hdelta = curr_jiffies - runtime->hw_ptr_jiffies;
+			if (hdelta > runtime->hw_ptr_buffer_jiffies/2) {
+				hw_base += runtime->buffer_size;
+				if (hw_base >= runtime->boundary) {
+					hw_base = 0;
+					crossed_boundary++;
+				}
+				new_hw_ptr = hw_base + pos;
+				goto __delta;
+			}
+		}
+	}
+	/* new_hw_ptr might be lower than old_hw_ptr in case when */
+	/* pointer crosses the end of the ring buffer */
+	if (new_hw_ptr < old_hw_ptr) { /* 若硬件指针越过了缓冲区边界 */
+		hw_base += runtime->buffer_size;
+		if (hw_base >= runtime->boundary) {
+			hw_base = 0;
+			crossed_boundary++;
+		}
+		new_hw_ptr = hw_base + pos;
+	}
+      __delta:
+	delta = new_hw_ptr - old_hw_ptr;
+	if (delta < 0)		/* 若FIFO指针越过了boundary */
+		delta += runtime->boundary;
+	if (xrun_debug(substream, in_interrupt ?
+			XRUN_DEBUG_PERIODUPDATE : XRUN_DEBUG_HWPTRUPDATE)) {
+		char name[16];
+		snd_pcm_debug_name(substream, name, sizeof(name));
+		snd_printd("%s_update: %s: pos=%u/%u/%u, "
+			   "hwptr=%ld/%ld/%ld/%ld\n",
+			   in_interrupt ? "period" : "hwptr",
+			   name,
+			   (unsigned int)pos,
+			   (unsigned int)runtime->period_size,
+			   (unsigned int)runtime->buffer_size,
+			   (unsigned long)delta,
+			   (unsigned long)old_hw_ptr,
+			   (unsigned long)new_hw_ptr,
+			   (unsigned long)runtime->hw_ptr_base);
+	}
+
+	if (runtime->no_period_wakeup) { /* 若硬件处理完一个period数据后不产
+					  * 生中断，即不更新hw_ptr. */
+		snd_pcm_sframes_t xrun_threshold;
+		/*
+		 * Without regular period interrupts, we have to check
+		 * the elapsed time to detect xruns.
+		 */
+		jdelta = curr_jiffies - runtime->hw_ptr_jiffies;
+		if (jdelta < runtime->hw_ptr_buffer_jiffies / 2) /* 若上一轮检查硬件指针不久前，hw_base没有更新 */
+			goto no_delta_check;
+		hdelta = jdelta - delta * HZ / runtime->rate;
+		xrun_threshold = runtime->hw_ptr_buffer_jiffies / 2 + 1;
+		while (hdelta > xrun_threshold) { /* 补偿上一次检查硬件指针到现在的hw_base */
+			delta += runtime->buffer_size;
+			hw_base += runtime->buffer_size;
+			if (hw_base >= runtime->boundary) {
+				hw_base = 0;
+				crossed_boundary++;
+			}
+			new_hw_ptr = hw_base + pos;
+			hdelta -= runtime->hw_ptr_buffer_jiffies;
+		}
+		goto no_delta_check;
+	}
+
+	/* something must be really wrong */
+	if (delta >= runtime->buffer_size + runtime->period_size) { /* 硬件异常 */
+		hw_ptr_error(substream,
+			       "Unexpected hw_pointer value %s"
+			       "(stream=%i, pos=%ld, new_hw_ptr=%ld, "
+			       "old_hw_ptr=%ld)\n",
+				     in_interrupt ? "[Q] " : "[P]",
+				     substream->stream, (long)pos,
+				     (long)new_hw_ptr, (long)old_hw_ptr);
+		return 0;
+	}
+
+	/* Do jiffies check only in xrun_debug mode */
+	if (!xrun_debug(substream, XRUN_DEBUG_JIFFIESCHECK))
+		goto no_jiffies_check;
+
+	/* Skip the jiffies check for hardwares with BATCH flag.
+	 * Such hardware usually just increases the position at each IRQ,
+	 * thus it can't give any strange position.
+	 */
+	if (runtime->hw.info & SNDRV_PCM_INFO_BATCH)
+		goto no_jiffies_check;
+	hdelta = delta;
+	if (hdelta < runtime->delay)
+		goto no_jiffies_check;
+	hdelta -= runtime->delay;
+	jdelta = curr_jiffies - runtime->hw_ptr_jiffies;
+	if (((hdelta * HZ) / runtime->rate) > jdelta + HZ/100) {
+		delta = jdelta /
+			(((runtime->period_size * HZ) / runtime->rate)
+								+ HZ/100);
+		/* move new_hw_ptr according jiffies not pos variable */
+		new_hw_ptr = old_hw_ptr;
+		hw_base = delta;
+		/* use loop to avoid checks for delta overflows */
+		/* the delta value is small or zero in most cases */
+		while (delta > 0) {
+			new_hw_ptr += runtime->period_size;
+			if (new_hw_ptr >= runtime->boundary) {
+				new_hw_ptr -= runtime->boundary;
+				crossed_boundary--;
+			}
+			delta--;
+		}
+		/* align hw_base to buffer_size */
+		hw_ptr_error(substream,
+			     "hw_ptr skipping! %s"
+			     "(pos=%ld, delta=%ld, period=%ld, "
+			     "jdelta=%lu/%lu/%lu, hw_ptr=%ld/%ld)\n",
+			     in_interrupt ? "[Q] " : "",
+			     (long)pos, (long)hdelta,
+			     (long)runtime->period_size, jdelta,
+			     ((hdelta * HZ) / runtime->rate), hw_base,
+			     (unsigned long)old_hw_ptr,
+			     (unsigned long)new_hw_ptr);
+		/* reset values to proper state */
+		delta = 0;
+		hw_base = new_hw_ptr - (new_hw_ptr % runtime->buffer_size);
+	}
+ no_jiffies_check:
+	if (delta > runtime->period_size + runtime->period_size / 2) {
+		hw_ptr_error(substream,
+			     "Lost interrupts? %s"
+			     "(stream=%i, delta=%ld, new_hw_ptr=%ld, "
+			     "old_hw_ptr=%ld)\n",
+			     in_interrupt ? "[Q] " : "",
+			     substream->stream, (long)delta,
+			     (long)new_hw_ptr,
+			     (long)old_hw_ptr);
+	}
+
+ no_delta_check:
+	if (runtime->status->hw_ptr == new_hw_ptr)
+		return 0;
+
+	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK &&
+	    runtime->silence_size > 0)
+		snd_pcm_playback_silence(substream, new_hw_ptr);
+
+	if (in_interrupt) {
+		delta = new_hw_ptr - runtime->hw_ptr_interrupt;
+		if (delta < 0)
+			delta += runtime->boundary;
+		delta -= (snd_pcm_uframes_t)delta % runtime->period_size;
+		runtime->hw_ptr_interrupt += delta;
+		if (runtime->hw_ptr_interrupt >= runtime->boundary)
+			runtime->hw_ptr_interrupt -= runtime->boundary;
+	}
+	runtime->hw_ptr_base = hw_base; /* 更新FIFO上的hw指针 */
+	runtime->status->hw_ptr = new_hw_ptr;
+	runtime->hw_ptr_jiffies = curr_jiffies; /* 记录本次硬件指针更新的时间戳 */
+	if (crossed_boundary) {
+		snd_BUG_ON(crossed_boundary != 1);
+		runtime->hw_ptr_wrap += runtime->boundary;
+	}
+	if (runtime->tstamp_mode == SNDRV_PCM_TSTAMP_ENABLE) {
+		runtime->status->tstamp = curr_tstamp;
+
+		if (!(runtime->hw.info & SNDRV_PCM_INFO_HAS_WALL_CLOCK)) {
+			/*
+			 * no wall clock available, provide audio timestamp
+			 * derived from pointer position+delay
+			 */
+			u64 audio_frames, audio_nsecs;
+
+			if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK)
+				audio_frames = runtime->hw_ptr_wrap
+					+ runtime->status->hw_ptr
+					- runtime->delay;
+			else
+				audio_frames = runtime->hw_ptr_wrap
+					+ runtime->status->hw_ptr
+					+ runtime->delay;
+			audio_nsecs = div_u64(audio_frames * 1000000000LL,
+					runtime->rate);
+			audio_tstamp = ns_to_timespec(audio_nsecs);
+		}
+		runtime->status->audio_tstamp = audio_tstamp;
+	}
+
+	return snd_pcm_update_state(substream, runtime); /* 通过本次更新后的
+							  * 硬件指针，检查是
+							  * 否XRUN，或唤醒等
+							  * 待在它上面的队列，
+							  * 如poll()调用，
+							  * lib_write1(). */
+}
