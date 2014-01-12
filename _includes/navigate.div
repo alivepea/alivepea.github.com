@@ -4,7 +4,11 @@
       <a href="/">文章列表</a>
       <ul id="category">
         {% for category in site.categories %}
-        <li><a href="/{{ category[0] }}.html">{{ category[0] }}</a></li>
+	{% if page.url contains category[0] %}
+	  <li><a href="/{{ category[0] }}.html"><u>{{ category[0] }}</u></a></li>
+	{% else %}
+          <li><a href="/{{ category[0] }}.html">{{ category[0] }}</a></li>
+	{% endif %}
         {% endfor %}
       </ul>
     </li>
