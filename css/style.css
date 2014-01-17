@@ -121,7 +121,7 @@ blockquote {
 blockquote p {
     text-indent: 0em;
 }
-q, var, code, em, strong {
+q, code, em, strong {
     margin: 0.2em;
     font-family: Arial;
 }
@@ -145,8 +145,16 @@ kbd {
 }
 
 var {
-    font-family: "Arial Black";
+    margin: 0em;
     font-style: normal;
+}
+
+#article var:before {
+    content: "『";
+}
+
+#article var:after {
+    content: "』";
 }
 
 table
