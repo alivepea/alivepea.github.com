@@ -109,7 +109,7 @@ card1上的pcm1 capture设备<q>pcmC1D1c</q>.
     ├── soc ASOC子系统的实现。
     └── spi/usb spi/usb声卡。
 
-下面是一张alsa的架构草图，真的很草哟...
+Alsa的架构如下图。
 
 [ ![alsa][alsa_t_image] ][alsa_image]
 
