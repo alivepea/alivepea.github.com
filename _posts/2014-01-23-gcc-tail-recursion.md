@@ -77,4 +77,38 @@ description: gcc对尾递归的优化
 
 如果发现任何谬误，请告诉我☺
 
+* * * * *
+更新一网友的回复：
+
+    ret_type foo (type para1, type para2)
+    {
+         if (cond)
+            return (no_cal_expr);
+    
+        stat1;
+        stat2;
+        ...
+        statn;
+    
+        foo(argu1, argu2);
+    }
+	
+优化后就是下面的形式：
+	
+    ret_type foo(type para1, type para2)
+    {
+    start:
+        if (cond)
+            return (no_cal_expr);
+        stat1;
+        stat2;
+        ...
+        statn;
+    
+        para1 = argu1, para2 = argu2;
+        goto start;
+    }
+
+每次跳转循环后，只能函数参数变化了。清晰的展示了优化后的效果。
+
 ~EOF~ {% include post_date.span %}
