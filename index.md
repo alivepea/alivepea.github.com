@@ -1,6 +1,8 @@
 ---
 layout: default
 title: 那一颗花生
+keywords: [程序员, kernel, gentoo, 内核]
+description: 一个程序员的博客
 ---
 
 <ul class="post">
